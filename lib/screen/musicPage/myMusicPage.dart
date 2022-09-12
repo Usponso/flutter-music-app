@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:fronttraining/screen/musicPage/widgets/appBarMusic.dart';
+import 'package:fronttraining/screen/musicPage/widgets/buttonBarMusic.dart';
+import 'package:fronttraining/screen/musicPage/widgets/sliderMusic.dart';
 
 class MyMusicPage extends StatefulWidget {
   const MyMusicPage({super.key});
@@ -9,6 +11,8 @@ class MyMusicPage extends StatefulWidget {
 }
 
 class _MyMusicPageState extends State<MyMusicPage> {
+  double _currentTime = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +29,17 @@ class _MyMusicPageState extends State<MyMusicPage> {
                 Text("TITRE 1", style: TextStyle(color: Colors.white)),
                 Text("IMAGE", style: TextStyle(color: Colors.white)),
                 Text("TITRE + ARTISTE", style: TextStyle(color: Colors.white)),
-                Text("SLIDER", style: TextStyle(color: Colors.white)),
-                Text("LISTE BOUTON", style: TextStyle(color: Colors.white)),
+                SliderMusic(currentTime: _currentTime, callback: changeTimeValue),
+                ButtonBarMusic(),
               ],
             ),
           ),
         ));
+  }
+
+  void changeTimeValue(value){
+    setState(() {
+      _currentTime = value;
+    });
   }
 }
