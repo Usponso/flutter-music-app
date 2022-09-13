@@ -6,7 +6,7 @@ class MyAppBarMusic extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.black87,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
