@@ -1,5 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import "package:flutter/material.dart";
-import 'package:fronttraining/screen/musicPage/widgets/appBarMusic.dart';
+import 'package:fronttraining/screen/commons/appBarMusic.dart';
 import 'package:fronttraining/screen/musicPage/widgets/buttonBarMusic.dart';
 import 'package:fronttraining/screen/musicPage/widgets/coverAlbum.dart';
 import 'package:fronttraining/screen/musicPage/widgets/sliderMusic.dart';
@@ -18,6 +19,9 @@ class MyMusicPage extends StatefulWidget {
 class _MyMusicPageState extends State<MyMusicPage> {
   double _currentTime = 0.0;
   int _index = 0;
+  bool _isPlay = false;
+
+  AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,8 @@ class _MyMusicPageState extends State<MyMusicPage> {
                 ),
                 ButtonBarMusic(
                   callback: changeMusic,
+                  callbackAudio: play,
+                  isPlay: _isPlay,
                 ),
               ],
             ),
@@ -67,7 +73,7 @@ class _MyMusicPageState extends State<MyMusicPage> {
           _index++;
         }
       } else if (_index - 1 < 0) {
-        _index = album_test.songs.length-1;
+        _index = album_test.songs.length - 1;
       } else {
         _index--;
       }
@@ -78,6 +84,18 @@ class _MyMusicPageState extends State<MyMusicPage> {
   void changeTimeValue(value) {
     setState(() {
       _currentTime = value;
+    });
+  }
+
+  Future<void> play() async {
+    if (_isPlay) {
+      await _audioPlayer.pause();
+    } else {
+      String path = album_test.songs[_index].songUrl;
+      await _audioPlayer.play(AssetSource(path));
+    }
+    setState(() {
+      _isPlay = !_isPlay;
     });
   }
 }

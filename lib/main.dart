@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fronttraining/screen/homepage/homepage.dart';
 import 'package:fronttraining/screen/musicPage/myMusicPage.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyMusicPage(),
+      home: HomePage(),
     );
   }
 }
